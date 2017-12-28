@@ -14,7 +14,7 @@ typedef struct _treeNode{
 }_TREENODE;
 
 Position createTreeNode();
-int insertNode(Position,int);
+Position insertNode(Position,int);
 int printTreeInOrder(Position);
 Position findMax(Position);
 Position findMin(Position);
@@ -25,6 +25,9 @@ Position deleteNodev2(Position,int);
 int main(int argc,char** argv)
 {
     Position root=NULL;//ne treba nam head
+    root=insertNode(root,12);
+    insertNode(root,133);
+    printTreeInOrder(root);
     return RESULT_OK;
 }
 
@@ -39,7 +42,7 @@ Position createTreeNode()
     return q;
 }
 
-int insertNode(Position q,int x)
+Position insertNode(Position q,int x)
 {
     //insert refresha sve pokazivace od roota do mjesta di stavljamo novi element
     if(q==NULL){
@@ -58,9 +61,9 @@ int insertNode(Position q,int x)
 int printTreeInOrder(Position t)
 {
     if(t==NULL)return RESULT_OK;
-    printTree(t->left);
+    printTreeInOrder(t->left);
     printf("\n%d",t->el);
-    printTree(t->right);
+    printTreeInOrder(t->right);
     return RESULT_OK;
 }
 
@@ -83,7 +86,7 @@ Position findElement(Position t,int x)
     else if(x<t->el)
         return findElement(t->left,x);
     else if(x>t->el)
-        return find(t->right,x);
+        return findElement(t->right,x);
     else
         return t;
 }
